@@ -1,0 +1,91 @@
+<HTML>
+<style>
+    n.button {
+        width: 200px;
+        height: 80px;
+    }
+    label {
+        display: block;
+        font: 1rem 'Fira Sans', sans-serif;
+    }
+</style>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://aka.ms/csspeech/jsbrowserpackageraw"></script>
+</head>
+
+<body>
+    <button class="button" id="ttsBtn" style="width: 200px; height: 80px;">Text to Speech</button>
+
+    <audio id="audio" controls autoplay style="display: none;">
+        <source src="" type="audio/wav">
+    </audio>
+
+    <br> <br>
+
+    <label>subscriptionKey</label>
+    <input type="text" id="subscriptionKey" required minlength="4" maxlength="32" size="34">
+    <br> <br>
+
+    <label>serviceRegion</label>
+    <input type="text" id="serviceRegion" required minlength="4" maxlength="32" size="34">
+    <br>
+    serviceRegion : https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/regions
+
+    <script id="ttsBody" type="application/ssml+xml">
+        <speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="en-US">
+            <voice name="en-US-JennyNeural">
+                Good morning!
+            </voice>
+            <voice name="en-US-ChristopherNeural">
+                Good morning to you too Jenny!
+            </voice>
+        </speak>
+    </script>
+
+    <script>
+        var SpeechSDK;
+        var synthesizer;
+
+        function synthesizeSpeech() {
+            var subscriptionKey = document.getElementById("subscriptionKey");
+            var serviceRegion = document.getElementById("serviceRegion");
+            var speechConfig = SpeechSDK.SpeechConfig.fromSubscription(subscriptionKey.value, serviceRegion.value); // https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/regions
+            var audioConfig = SpeechSDK.AudioConfig.fromDefaultSpeakerOutput();
+            synthesizer = new SpeechSDK.SpeechSynthesizer(speechConfig, audioConfig);
+            // synthesizer.speakTextAsync(
+            //     "Synthesizing directly to speaker output.",
+            //     result => {
+            //         if (result) {
+            //             synthesizer.close();
+            //             return result.audioData;
+            //         }
+            //     },
+            //     error => {
+            //         console.log(error);
+            //         synthesizer.close();
+            //     });
+
+            synthesizer.speakSsmlAsync(
+                     document.getElementById("ttsBody").textContent,
+                result => {
+                    if (result) {
+                        synthesizer.close();
+                        return result.audioData;
+                    }
+                },
+                error => {
+                    console.log(error);
+                    synthesizer.close();
+                });
+        }
+
+        $("#ttsBtn").click(() => {
+            synthesizeSpeech();
+        });
+    </script>
+
+</body>
+
+</HTML>
