@@ -1,0 +1,26 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "AzureTTS",
+	"EngineVersion": "4.27.0",
+	"Description": "Azure TTS(Text-to-Speech) plugin",
+	"Category": "AI",
+	"CreatedBy": "Kenn Zhang",
+	"CreatedByURL": "https://github.com/breakstring/AzureTTS",
+	"DocsURL": "https://github.com/breakstring/AzureTTS",
+	"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/e3787b745a0d4b54a8440ce94fdba53c",
+	"SupportURL": "https://github.com/breakstring/AzureTTS/issues",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "AzureTTS",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"WhitelistPlatforms": ["Win64"]
+		}
+	]
+}
