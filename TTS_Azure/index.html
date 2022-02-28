@@ -31,14 +31,14 @@
     <label>serviceRegion</label>
     <input type="text" id="serviceRegion" required minlength="4" maxlength="32" size="34">
     <br>
-    serviceRegion : https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/regions
+    serviceRegion : https://docs.microsoft.com/ko-KR/azure/cognitive-services/speech-service/regions
 
     <script id="ttsBody" type="application/ssml+xml">
-        <speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="en-US">
-            <voice name="en-US-JennyNeural">
+        <speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="ko-KR">
+            <voice name="ko-KR-SunHiNeural">
                 Good morning!
             </voice>
-            <voice name="en-US-ChristopherNeural">
+            <voice name="ko-KR-InJoonNeural">
                 Good morning to you too Jenny!
             </voice>
         </speak>
@@ -51,9 +51,11 @@
         function synthesizeSpeech() {
             var subscriptionKey = document.getElementById("subscriptionKey");
             var serviceRegion = document.getElementById("serviceRegion");
-            var speechConfig = SpeechSDK.SpeechConfig.fromSubscription(subscriptionKey.value, serviceRegion.value); // https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/regions
+            var speechConfig = SpeechSDK.SpeechConfig.fromSubscription(subscriptionKey.value, serviceRegion.value); // https://docs.microsoft.com/ko-KR/azure/cognitive-services/speech-service/regions
             var audioConfig = SpeechSDK.AudioConfig.fromDefaultSpeakerOutput();
             synthesizer = new SpeechSDK.SpeechSynthesizer(speechConfig, audioConfig);
+
+
             // synthesizer.speakTextAsync(
             //     "Synthesizing directly to speaker output.",
             //     result => {
